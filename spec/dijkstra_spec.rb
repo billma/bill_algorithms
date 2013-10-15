@@ -12,7 +12,6 @@ describe Dijkstra do
   end
 
   describe "#set_graph" do
-
     it "should return false for empty or nil input " do
       expect(@djk.set_graph nil).to be false
       expect(@djk.set_graph []).to be false
@@ -40,6 +39,11 @@ describe Dijkstra do
       @djk.vertices.length.should equal 0
     end 
 
+    it "should parse two digit path" do 
+      @djk.set_graph ["ae18"]
+      @djk.edges['ae'].should equal 18
+    end 
+
     it "should initalize value for vertices edges" do
       @djk.set_graph ["ae8"]
       @djk.vertices.length.should equal 2 
@@ -50,23 +54,36 @@ describe Dijkstra do
   end  
 
   describe "#shortest_path" do
-    it "should return 0 for empty graph" do
+    it "should find no path " do
       expect(@djk.shortest_path "a", "b" ).to be 0
     end 
 
-    it "should return 8 for [ae8]" do
+    it "should find one path" do
       @djk.set_graph ["ae8"]
       expect(@djk.shortest_path "a", "e" ).to be 8
     end 
     
-    it "should return 8 for [ac6, cd2]" do 
+    it "should find straight path" do 
       @djk.set_graph ["ac6", "cd2"]
       expect(@djk.shortest_path "a", "d").to be 8
     end 
 
-    it "should return 2 for [ac6, cd2, ad2]" do 
+    it "should find direct path" do 
       @djk.set_graph ["ac6", "cd2", "ad2"]
       expect(@djk.shortest_path "a", "d").to be 2 
+    end 
+
+    it "should find multiple path" do 
+      @djk.set_graph ["ab1", "ac3", "bd2", "cd4"]
+      expect(@djk.shortest_path "a", "d").to be 3 
+    end 
+
+    it "should handle complex cases" do
+      @djk.set_graph ["ab12", "bc3", "ce10", "de1", "ad7", "ac1", "dc9"]
+      @djk.shortest_path( "a", "e" ).should eql 8
+      @djk.shortest_path( "b", "d" ).should eql 11
+      @djk.shortest_path( "d", "b" ).should eql 11
+      @djk.shortest_path( "b", "e" ).should eql 12
     end 
   end 
 end
