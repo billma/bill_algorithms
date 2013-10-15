@@ -57,27 +57,27 @@ describe Dijkstra do
   # test algorithm logic
   describe "#shortest_path" do
     it "should find no path " do
-      @djk.shortest_path "a", "b" )should eql 0
+      @djk.shortest_path( "a", "b" ).should eql 0
     end 
 
     it "should find one path" do
       @djk.set_graph ["ae8"]
-      @djk.shortest_path "a", "e" )should eql 8
+      @djk.shortest_path("a", "e" ).should eql 8
     end 
     
     it "should find straight path" do 
       @djk.set_graph ["ac6", "cd2"]
-      @djk.shortest_path "a", "d").should eql 8
+      @djk.shortest_path("a", "d").should eql 8
     end 
 
     it "should find direct path" do 
       @djk.set_graph ["ac6", "cd2", "ad2"]
-      @djk.shortest_path "a", "d").should eql 2 
+      @djk.shortest_path("a", "d").should eql 2 
     end 
 
     it "should find multiple path" do 
       @djk.set_graph ["ab1", "ac3", "bd2", "cd4"]
-      @djk.shortest_path "a", "d").should eql 3 
+      @djk.shortest_path("a", "d").should eql 3 
     end 
 
     it "should handle complex cases" do
