@@ -11,7 +11,6 @@ end
 
 
 class Dijkstra
-  attr_accessor :vertices, :edges, :stack, :visited
 
   def initialize
     @vertices = {} 
