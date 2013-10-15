@@ -10,7 +10,8 @@ describe Dijkstra do
       @djk.should be_an_instance_of Dijkstra
     end 
   end
-
+  
+  # test input validity
   describe "#set_graph" do
     it "should return false for empty or nil input " do
       expect(@djk.set_graph nil).to be false
@@ -52,30 +53,31 @@ describe Dijkstra do
       @djk.edges['ae'].should equal 8
     end 
   end  
-
+  
+  # test algorithm logic
   describe "#shortest_path" do
     it "should find no path " do
-      expect(@djk.shortest_path "a", "b" ).to be 0
+      @djk.shortest_path "a", "b" )should eql 0
     end 
 
     it "should find one path" do
       @djk.set_graph ["ae8"]
-      expect(@djk.shortest_path "a", "e" ).to be 8
+      @djk.shortest_path "a", "e" )should eql 8
     end 
     
     it "should find straight path" do 
       @djk.set_graph ["ac6", "cd2"]
-      expect(@djk.shortest_path "a", "d").to be 8
+      @djk.shortest_path "a", "d").should eql 8
     end 
 
     it "should find direct path" do 
       @djk.set_graph ["ac6", "cd2", "ad2"]
-      expect(@djk.shortest_path "a", "d").to be 2 
+      @djk.shortest_path "a", "d").should eql 2 
     end 
 
     it "should find multiple path" do 
       @djk.set_graph ["ab1", "ac3", "bd2", "cd4"]
-      expect(@djk.shortest_path "a", "d").to be 3 
+      @djk.shortest_path "a", "d").should eql 3 
     end 
 
     it "should handle complex cases" do
