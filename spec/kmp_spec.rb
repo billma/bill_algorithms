@@ -22,6 +22,8 @@ describe KMP do
     end  
      it "complex cases" do 
       KMP.max_match("abc", "ab").should eql 2 
+      KMP.max_match("abb","bbb").should eql 2
+      KMP.max_match("bbb","babb").should eql 2
       KMP.max_match("ababac", "abababacdd").should eql 6
      end 
   end 
