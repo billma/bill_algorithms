@@ -5,13 +5,19 @@ class KMP
   def self.search str1, str2
     return false if str1.nil? or str2.nil?
     return true if str1 == str2
-    score = max_match str1, str2
+    score = find str1, str2
     return score == str1.length
   end 
   
   # return score of max char 
   # matched between str1 and str2
   def self.max_match str1, str2
+    a = find str1, str2
+    b = find str2, str1
+    return a>=b ? a : b 
+  end 
+
+  def self.find str1, str2
     graph = set_graph str1, str2
     x = 0
     max = 0
